@@ -33,23 +33,18 @@
       "ssh_username": "vagrant",
       "ssh_wait_timeout": "10000s",
       "type": "virtualbox-iso",
-      "vm_name": "affinitic",
+      "vm_name": "affinitic-box",
       "vboxmanage": [
         ["modifyvm", "{{.Name}}", "--memory", "512"],
         ["modifyvm", "{{.Name}}", "--cpus", "1"]
       ]
-    },
+    }
   ],
   "post-processors": [
     {
-      "output": "debian-7.4.0-amd64_virtualbox.box",
+      "output": "affinitic.box",
       "type": "vagrant",
       "only": ["virtualbox-iso"]
-    },
-    {
-      "output": "debian-7.4.0-amd64_vmware.box",
-      "type": "vagrant",
-      "only": ["vmware-iso"]
     }
   ],
   "provisioners": [
@@ -62,16 +57,6 @@
             "scripts/vagrant.sh",
             "scripts/ruby.sh",
             "scripts/puppet.sh",
-            "scripts/cleanup.sh"
-          ]
-        },
-        "vmware-iso": {
-          "scripts": [
-            "scripts/base.sh",
-            "scripts/vmware.sh",
-            "scripts/vagrant.sh",
-            "scripts/ruby.sh",
-            "scripts/chef.sh",
             "scripts/cleanup.sh"
           ]
         }
